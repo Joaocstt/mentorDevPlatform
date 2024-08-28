@@ -1,8 +1,4 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+require_once 'Client/web.php';
 
-Route::get('/', function () {
-    return Inertia::render('welcome');
-});
