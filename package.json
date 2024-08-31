@@ -20,7 +20,15 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "@heroicons/vue": "^2.1.5",
         "@inertiajs/vue3": "^1.2.0",
-        "vue": "^3.4.38"
+        "@primevue/themes": "^4.0.5",
+        "@vue-hero-icons/outline": "^1.7.2",
+        "pinia": "^2.2.2",
+        "primeicons": "^7.0.0",
+        "primevue": "^4.0.5",
+        "vue": "^3.4.38",
+        "vue-next-heroicons": "^1.0.1",
+        "vue-toastification": "^2.0.0-rc.5"
     }
 }

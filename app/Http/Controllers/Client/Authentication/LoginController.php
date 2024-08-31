@@ -25,7 +25,12 @@ class LoginController extends Controller
 
     public function show() 
     {
+        if(Auth::check()) {
+            return Inertia::render('Arena/dashboard');
+        }
+
         return Inertia::render('Arena/login');
+
     }
 
     public function loginDo(LoginRequest $request): JsonResponse
@@ -44,5 +49,12 @@ class LoginController extends Controller
         return response()->json(['message' => 'Suas credencias são inválidas']
         , HttpFoundationResponse::HTTP_NOT_FOUND);
 
+    }
+
+    public function logout(): RedirectResponse 
+    {
+        Auth::logout();
+        Session::regenerateToken();
+        return redirect()->route('client.login');
     }
 }

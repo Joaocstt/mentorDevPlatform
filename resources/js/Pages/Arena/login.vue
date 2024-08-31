@@ -12,7 +12,7 @@
             alt="Office" />
         </div>
         <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
-          <div class="w-full">
+          <form @submit.prevent="submitForm" method="POST" class="w-full">
             <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
               Login
             </h1>
@@ -36,10 +36,10 @@
                 />
             </label>
 
-            <a class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+            <button type="submit" class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
               href="#">
               Entrar
-            </a>
+            </button>
 
             <hr class="my-8" />
 
@@ -49,7 +49,7 @@
                 Faça sua inscrição
               </a>
             </p>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -60,14 +60,35 @@
 <script setup>
 import { reactive } from 'vue';
 
+import service from "../../Services/Client/index";
+import ToastNotification from "../../Components/Toast/ToastNotification.vue";
+
 const form = reactive({
   email: "", 
   password: ""
 })
+import { useToast } from "vue-toastification";
+import { route } from '../../../../vendor/tightenco/ziggy/dist';
+const toast = useToast();
 
-// submitForm = async () => {
-//   await service.auth.login(form.email, form.password)
-// }
+
+const submitForm = async () => {
+  try {
+    await service.auth.login(form.email, form.password);
+    window.location.href = route('client.dashboard')
+  } catch (error) {
+    toast({
+      component: ToastNotification,
+      props: {
+        title: 'Ooops, não foi possível efetuar o login!',
+        content: `${error.message}`,
+        icon: 'XCircle',
+        classIcon: 'text-red-400',
+      },
+    });
+
+  }
+};
 
 
 </script>
