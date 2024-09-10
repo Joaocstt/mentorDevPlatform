@@ -3,7 +3,7 @@ import { useAuthStore } from "../../../Store/Client/Auth";
 
 
 export default (httpClient) => ({
-    
+
     login: async (email, password) => {
         const authStore = useAuthStore(); // Obtém a instância do store de autenticação
 
@@ -13,7 +13,7 @@ export default (httpClient) => ({
                 password,
             })
             .then((response) => {
-                if (response.request.status == 200 && response.data.user) {
+                if (response.request.status === 200 && response.data.user) {
                     authStore.setUser(response.data.user)
                     return;
                 }
@@ -34,7 +34,7 @@ export default (httpClient) => ({
             });
     },
     logout: () => {
-        const authStore = useAuthStore(); // Obtém a instância do store de autenticação
+        const authStore = useAuthStore();
         authStore.logout();
     }
 });

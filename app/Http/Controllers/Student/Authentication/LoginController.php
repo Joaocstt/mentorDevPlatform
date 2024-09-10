@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Client\Authentication;
+namespace App\Http\Controllers\Student\Authentication;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\LoginRequest;
@@ -23,7 +23,7 @@ class LoginController extends Controller
         return redirect()->route('client.dashboard');
     }
 
-    public function show() 
+    public function show(): Response
     {
         if(Auth::check()) {
             return Inertia::render('Arena/dashboard');
@@ -51,7 +51,7 @@ class LoginController extends Controller
 
     }
 
-    public function logout(): RedirectResponse 
+    public function logout(): RedirectResponse
     {
         Auth::logout();
         Session::regenerateToken();
